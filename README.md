@@ -8,6 +8,21 @@ The system combines **YOLO object detection, football tracking, scoreboard detec
 
 ---
 
+---
+
+## 🖥️ Application Preview
+
+### GOALLENS-AI Dashboard
+
+![GOALLENS-AI Dashboard](docs/images/goallens-dashboard.png)
+
+### Highlight Generation Interface
+
+![GOALLENS-AI Highlight Generation](docs/images/goallens-dashboard2.png)
+
+---
+
+
 ## 📌 Problem Statement
 
 Football matches can last more than 90 minutes and contain a large amount of gameplay that may not be relevant to viewers looking for important moments.
