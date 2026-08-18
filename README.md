@@ -38,38 +38,52 @@ The main objectives of GOALLENS-AI are:
 
 ## 🗂️ Dataset
 
-### 1. Custom Football Object Detection Dataset
+### 1. SoccerNet Dataset
 
-A custom football object detection dataset was prepared for training the YOLO model.
+The project uses football video and tracking data from the **SoccerNet** dataset for computer vision development and evaluation.
+
+SoccerNet is a large-scale football video understanding dataset containing professional football match data and annotations for various computer vision tasks.
+
+Official dataset source:
+
+https://www.soccer-net.org/
+
+The dataset was used as the source for preparing football frames and annotations for the custom object detection pipeline.
+
+### 2. Custom Football Object Detection Dataset
+
+A custom football object detection dataset was prepared using football frames derived from the SoccerNet data.
 
 The dataset contains the following classes:
 
-| Class ID | Class      |
-| -------- | ---------- |
-| 0        | Player     |
-| 1        | Goalkeeper |
-| 2        | Referee    |
-| 3        | Ball       |
+| Class ID | Class |
+|----------|-------|
+| 0 | Player |
+| 1 | Goalkeeper |
+| 2 | Referee |
+| 3 | Ball |
 
-The trained ball/object detection model is included in the repository.
+The trained YOLO object detection model is included in the repository:
 
-### 2. Scoreboard Dataset
+```text
+backend/models/ball_tracking/best.pt
 
-A custom scoreboard dataset was used to train a YOLO-based scoreboard detection model.
+3. Custom Scoreboard Dataset
+
+A custom scoreboard dataset was prepared for training the YOLO-based scoreboard detection model used in the goal detection pipeline.
 
 The trained scoreboard detection model is included in:
 
-```text
 backend/models/scoreboard/best.pt
-```
+4. Match Videos
 
-### 3. Match Videos
+Football match videos were used for testing and demonstrating the complete GOALLENS-AI highlight-generation pipeline.
 
-Football match videos were used for testing and demonstrating the complete highlight-generation pipeline.
+Due to the large size of football video files, the original match videos and generated highlight videos are not included directly in this repository.
 
-Large input videos and generated output videos are **not included directly in the repository** because of their large file sizes.
+Users can provide their own football match video as input when running the application.
 
----
+Dataset Access Note: SoccerNet may require registration and acceptance of its dataset terms before downloading the dataset. The dataset itself is not redistributed in this repository.
 
 ## 🧠 Methodology
 
