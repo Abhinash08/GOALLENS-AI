@@ -63,6 +63,74 @@ The main objectives of GOALLENS-AI are:
 
 ---
 
+...
+
+## 🏗️ Project Architecture
+
+[architecture diagram / explanation goes here]
+
+                    ┌──────────────────────┐
+                    │     React Frontend   │
+                    │  Upload + Results UI  │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │     FastAPI Backend   │
+                    │    Video Processing   │
+                    └──────────┬───────────┘
+                               │
+              ┌────────────────┼────────────────┐
+              ▼                ▼                ▼
+       ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
+       │ Ball YOLO   │  │ Scoreboard  │  │ Video       │
+       │ Detection   │  │ YOLO + OCR  │  │ Processing  │
+       └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
+              │                │                │
+              ▼                ▼                │
+       ┌─────────────┐  ┌─────────────┐         │
+       │ Interpolate │  │ Goal/Event  │         │
+       │ + Kalman    │  │ Detection   │         │
+       └──────┬──────┘  └──────┬──────┘         │
+              │                │                │
+              └────────────────┼────────────────┘
+                               ▼
+                    ┌──────────────────────┐
+                    │ Highlight Generation │
+                    │ + Overlap Merging    │
+                    └──────────┬───────────┘
+                               ▼
+                    ┌──────────────────────┐
+                    │ Final AI Highlights  │
+                    └──────────────────────┘
+
+---
+
+## 🏗️ Project Architecture
+
+```mermaid
+flowchart TD
+    A[Football Match Video] --> B[FastAPI Backend]
+
+    B --> C[YOLO Object Detection]
+    B --> D[Scoreboard Detection + OCR]
+
+    C --> E[Ball Tracking]
+    E --> F[Interpolation + Kalman Filtering]
+    F --> G[Ball Highlight Detection]
+
+    D --> H[Scoreboard Goal Detection]
+
+    G --> I[Highlight Window Generation]
+    H --> I
+
+    I --> J[Overlap Detection + Merging]
+    J --> K[FFmpeg Video Generation]
+    K --> L[Final AI Highlights]
+
+    B --> M[React Frontend]
+    L --> M
+
 ## 🗂️ Dataset
 
 ### 1. SoccerNet Dataset
@@ -397,7 +465,7 @@ If future model files exceed GitHub's file-size limitations, they should be host
 
 ---
 
-## 📊 Results
+## 📊 Results & Performance
 
 GOALLENS-AI successfully demonstrates an end-to-end football highlight generation pipeline.
 
@@ -421,6 +489,45 @@ The system is capable of:
 
 The final system successfully detects goal events through scoreboard analysis and displays the detected events in the web interface.
 
+### Ball Tracking Performance
+
+The ball tracking pipeline combines YOLO detections, interpolation, and Kalman filtering to maintain the ball trajectory during missed detections.
+
+| Metric | Result |
+|---|---:|
+| Total frames tested | 3,500 |
+| YOLO detected frames | 982 |
+| YOLO detection coverage | 28.06% |
+| Interpolated trajectory coverage | 70.06% |
+| Kalman prediction frames | 1,169 |
+| Final valid tracking positions | 2,151 |
+| Effective tracking coverage | 61.46% |
+| Maximum Kalman prediction gap | 15 frames |
+
+### Highlight Generation
+
+The system combines multiple event sources to generate football highlights:
+
+- ⚽ Scoreboard-based goal detection
+- 🟢 Ball-based highlight detection
+- 🎯 Event confidence scoring
+- ⏱️ Temporal highlight windows
+- 🔗 Overlapping-window merging
+- 🎬 Automated FFmpeg video generation
+
+For detected goals, the system generates a highlight window covering approximately **30 seconds before and 30 seconds after the detected event**.
+
+```text
+Goal Event
+    │
+    ├── -30 seconds
+    │
+    ├── ⚽ Goal
+    │
+    └── +30 seconds
+             │
+             ▼
+       60-second window
 ---
 
 ## 🎥 Sample Outputs
