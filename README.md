@@ -22,6 +22,18 @@ The system combines **YOLO object detection, football tracking, scoreboard detec
 
 ---
 
+---
+
+## 🎬 Highlight Generation Demo
+
+GOALLENS-AI automatically detects football events and generates highlight clips from the input match video.
+
+![GOALLENS-AI Highlight Demo](docs/images/goallens-highlight-demo.gif)
+
+The generated highlight pipeline combines ball-based event detection with scoreboard-based goal detection and merges overlapping highlight intervals into a final video.
+
+---
+
 
 ## 📌 Problem Statement
 
