@@ -8,8 +8,6 @@ The system combines **YOLO object detection, football tracking, scoreboard detec
 
 ---
 
----
-
 ## 🖥️ Application Preview
 
 ### GOALLENS-AI Dashboard
@@ -22,8 +20,6 @@ The system combines **YOLO object detection, football tracking, scoreboard detec
 
 ---
 
----
-
 ## 🎬 Highlight Generation Demo
 
 GOALLENS-AI automatically detects football events and generates highlight clips from the input match video.
@@ -33,7 +29,6 @@ GOALLENS-AI automatically detects football events and generates highlight clips 
 The generated highlight pipeline combines ball-based event detection with scoreboard-based goal detection and merges overlapping highlight intervals into a final video.
 
 ---
-
 
 ## 📌 Problem Statement
 
@@ -63,50 +58,9 @@ The main objectives of GOALLENS-AI are:
 
 ---
 
-...
-
 ## 🏗️ Project Architecture
 
-[architecture diagram / explanation goes here]
-
-                    ┌──────────────────────┐
-                    │     React Frontend   │
-                    │  Upload + Results UI  │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │     FastAPI Backend   │
-                    │    Video Processing   │
-                    └──────────┬───────────┘
-                               │
-              ┌────────────────┼────────────────┐
-              ▼                ▼                ▼
-       ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
-       │ Ball YOLO   │  │ Scoreboard  │  │ Video       │
-       │ Detection   │  │ YOLO + OCR  │  │ Processing  │
-       └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
-              │                │                │
-              ▼                ▼                │
-       ┌─────────────┐  ┌─────────────┐         │
-       │ Interpolate │  │ Goal/Event  │         │
-       │ + Kalman    │  │ Detection   │         │
-       └──────┬──────┘  └──────┬──────┘         │
-              │                │                │
-              └────────────────┼────────────────┘
-                               ▼
-                    ┌──────────────────────┐
-                    │ Highlight Generation │
-                    │ + Overlap Merging    │
-                    └──────────┬───────────┘
-                               ▼
-                    ┌──────────────────────┐
-                    │ Final AI Highlights  │
-                    └──────────────────────┘
-
----
-
-## 🏗️ Project Architecture
+The overall GOALLENS-AI system consists of a React frontend, FastAPI backend, computer vision pipelines, event detection modules, and automated highlight generation.
 
 ```mermaid
 flowchart TD
@@ -130,6 +84,26 @@ flowchart TD
 
     B --> M[React Frontend]
     L --> M
+```
+
+### Architecture Components
+
+| Component             | Responsibility                                                |
+| --------------------- | ------------------------------------------------------------- |
+| React Frontend        | Video upload, processing interface, and results visualization |
+| FastAPI Backend       | API endpoints and video-processing orchestration              |
+| YOLO Object Detection | Detects football-related objects                              |
+| Ball Tracking         | Tracks detected football positions across frames              |
+| Interpolation         | Recovers short gaps in ball detections                        |
+| Kalman Filtering      | Predicts ball position during temporary detection failures    |
+| Scoreboard Detection  | Locates the scoreboard using a custom YOLO model              |
+| OCR                   | Extracts score information from the scoreboard                |
+| Goal Detection        | Identifies score changes corresponding to potential goals     |
+| Highlight Generation  | Creates temporal highlight windows                            |
+| Highlight Merger      | Combines overlapping highlight intervals                      |
+| FFmpeg                | Generates the final highlight video                           |
+
+---
 
 ## 🗂️ Dataset
 
@@ -145,40 +119,52 @@ https://www.soccer-net.org/
 
 The dataset was used as the source for preparing football frames and annotations for the custom object detection pipeline.
 
+---
+
 ### 2. Custom Football Object Detection Dataset
 
 A custom football object detection dataset was prepared using football frames derived from the SoccerNet data.
 
 The dataset contains the following classes:
 
-| Class ID | Class |
-|----------|-------|
-| 0 | Player |
-| 1 | Goalkeeper |
-| 2 | Referee |
-| 3 | Ball |
+| Class ID | Class      |
+| -------- | ---------- |
+| 0        | Player     |
+| 1        | Goalkeeper |
+| 2        | Referee    |
+| 3        | Ball       |
 
 The trained YOLO object detection model is included in the repository:
 
 ```text
 backend/models/ball_tracking/best.pt
+```
 
-3. Custom Scoreboard Dataset
+---
+
+### 3. Custom Scoreboard Dataset
 
 A custom scoreboard dataset was prepared for training the YOLO-based scoreboard detection model used in the goal detection pipeline.
 
 The trained scoreboard detection model is included in:
 
+```text
 backend/models/scoreboard/best.pt
-4. Match Videos
+```
+
+---
+
+### 4. Match Videos
 
 Football match videos were used for testing and demonstrating the complete GOALLENS-AI highlight-generation pipeline.
 
-Due to the large size of football video files, the original match videos and generated highlight videos are not included directly in this repository.
+Due to the large size of football video files, the original match videos and generated highlight videos are **not included directly in this repository**.
 
 Users can provide their own football match video as input when running the application.
 
-Dataset Access Note: SoccerNet may require registration and acceptance of its dataset terms before downloading the dataset. The dataset itself is not redistributed in this repository.
+> **Dataset Access Note:** SoccerNet may require registration and acceptance of its dataset terms before downloading the dataset. The dataset itself is not redistributed in this repository.
+
+---
 
 ## 🧠 Methodology
 
@@ -290,7 +276,7 @@ The final merged clips are concatenated to generate the AI-generated highlight v
 * SciPy
 * scikit-image
 * Pillow
-* FFmpeg/video processing tools
+* FFmpeg
 
 ### Frontend
 
@@ -306,9 +292,9 @@ The final merged clips are concatenated to generate the AI-generated highlight v
 * Ball Tracking
 * Kalman Filtering
 * Interpolation
-* Optical/video-based temporal analysis
+* Temporal Video Analysis
 * OCR
-* Scoreboard analysis
+* Scoreboard Analysis
 
 ---
 
@@ -326,6 +312,7 @@ GOALLENS-AI/
 │   │       └── best.pt
 │   │
 │   ├── pipelines/
+│   │   ├── __init__.py
 │   │   ├── ball_detector.py
 │   │   ├── ball_highlight_generator.py
 │   │   ├── ball_highlight_scorer.py
@@ -334,6 +321,8 @@ GOALLENS-AI/
 │   │   └── scoreboard_goal_detector.py
 │   │
 │   ├── utils/
+│   │   └── inspect_notebook.py
+│   │
 │   ├── main.py
 │   └── video_processor.py
 │
@@ -346,11 +335,19 @@ GOALLENS-AI/
 │   │   ├── index.css
 │   │   └── main.jsx
 │   ├── package.json
+│   ├── package-lock.json
 │   └── vite.config.js
+│
+├── docs/
+│   └── images/
+│       ├── goallens-dashboard.png
+│       ├── goallens-dashboard2.png
+│       └── goallens-highlight-demo.gif
 │
 ├── inspect_notebook.py
 ├── requirements.txt
 ├── .gitignore
+├── LICENSE
 └── README.md
 ```
 
@@ -370,7 +367,7 @@ Make sure the following are installed:
 
 ---
 
-## 1. Clone the Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Abhinash08/GOALLENS-AI.git
@@ -379,7 +376,7 @@ cd GOALLENS-AI
 
 ---
 
-## 2. Create the Python Environment
+### 2. Create the Python Environment
 
 ```bash
 python -m venv .venv
@@ -393,7 +390,7 @@ python -m venv .venv
 
 ---
 
-## 3. Install Backend Dependencies
+### 3. Install Backend Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -401,7 +398,7 @@ pip install -r requirements.txt
 
 ---
 
-## 4. Start the Backend
+### 4. Start the Backend
 
 From the project root:
 
@@ -418,7 +415,7 @@ http://127.0.0.1:8000
 
 ---
 
-## 5. Install Frontend Dependencies
+### 5. Install Frontend Dependencies
 
 Open another terminal and run:
 
@@ -429,7 +426,7 @@ npm install
 
 ---
 
-## 6. Start the Frontend
+### 6. Start the Frontend
 
 ```bash
 npm run dev
@@ -447,7 +444,7 @@ Open the URL in a browser to access the GOALLENS-AI application.
 
 ## 🤖 Model Files
 
-Two trained YOLO models are included in the repository:
+Two trained YOLO models are included in the repository.
 
 ### Ball/Object Detection Model
 
@@ -460,6 +457,8 @@ backend/models/ball_tracking/best.pt
 ```text
 backend/models/scoreboard/best.pt
 ```
+
+The current model files are small enough to be stored directly in the repository.
 
 If future model files exceed GitHub's file-size limitations, they should be hosted using an appropriate large-file or external storage service and linked from this README.
 
@@ -489,31 +488,35 @@ The system is capable of:
 
 The final system successfully detects goal events through scoreboard analysis and displays the detected events in the web interface.
 
+---
+
 ### Ball Tracking Performance
 
 The ball tracking pipeline combines YOLO detections, interpolation, and Kalman filtering to maintain the ball trajectory during missed detections.
 
-| Metric | Result |
-|---|---:|
-| Total frames tested | 3,500 |
-| YOLO detected frames | 982 |
-| YOLO detection coverage | 28.06% |
-| Interpolated trajectory coverage | 70.06% |
-| Kalman prediction frames | 1,169 |
-| Final valid tracking positions | 2,151 |
-| Effective tracking coverage | 61.46% |
-| Maximum Kalman prediction gap | 15 frames |
+| Metric                           |    Result |
+| -------------------------------- | --------: |
+| Total frames tested              |     3,500 |
+| YOLO detected frames             |       982 |
+| YOLO detection coverage          |    28.06% |
+| Interpolated trajectory coverage |    70.06% |
+| Kalman prediction frames         |     1,169 |
+| Final valid tracking positions   |     2,151 |
+| Effective tracking coverage      |    61.46% |
+| Maximum Kalman prediction gap    | 15 frames |
+
+---
 
 ### Highlight Generation
 
 The system combines multiple event sources to generate football highlights:
 
-- ⚽ Scoreboard-based goal detection
-- 🟢 Ball-based highlight detection
-- 🎯 Event confidence scoring
-- ⏱️ Temporal highlight windows
-- 🔗 Overlapping-window merging
-- 🎬 Automated FFmpeg video generation
+* ⚽ Scoreboard-based goal detection
+* 🟢 Ball-based highlight detection
+* 🎯 Event confidence scoring
+* ⏱️ Temporal highlight windows
+* 🔗 Overlapping-window merging
+* 🎬 Automated FFmpeg video generation
 
 For detected goals, the system generates a highlight window covering approximately **30 seconds before and 30 seconds after the detected event**.
 
@@ -528,6 +531,10 @@ Goal Event
              │
              ▼
        60-second window
+```
+
+When multiple highlight events overlap, the corresponding temporal windows are merged to avoid duplicate footage.
+
 ---
 
 ## 🎥 Sample Outputs
@@ -542,6 +549,12 @@ Sample Input
 
 Sample Output
     └── final_AI_highlights.mp4
+```
+
+The repository includes a short demonstration GIF:
+
+```text
+docs/images/goallens-highlight-demo.gif
 ```
 
 Large media files should be hosted externally rather than committed directly to the Git repository.
@@ -559,7 +572,7 @@ backend/outputs/
 
 These directories contain uploaded videos, generated clips, temporary processing files, and runtime outputs.
 
-The project models and source code are included in the repository.
+The project source code, trained YOLO models, documentation images, and demonstration GIF are included in the repository.
 
 ---
 
@@ -570,6 +583,7 @@ GOALLENS-AI integrates multiple computer vision techniques into a single footbal
 * YOLO-based object detection
 * Football tracking
 * Temporal tracking recovery
+* Interpolation
 * Kalman filtering
 * Scoreboard detection
 * OCR-based score extraction
@@ -579,7 +593,10 @@ GOALLENS-AI integrates multiple computer vision techniques into a single footbal
 * Overlap-aware highlight merging
 * Automated video generation
 * React-based visualization interface
+* FastAPI-based backend processing
 
----
+## 📄 License
 
+This project is licensed under the **MIT License**.
 
+See the [`LICENSE`](LICENSE) file for details.
