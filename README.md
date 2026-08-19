@@ -1,4 +1,4 @@
-# ⚽ GOALlens
+# GOALlens
 
 ## AI-Based Football Highlight Detection and Generation
 
@@ -8,7 +8,7 @@ The system combines **YOLO object detection, football tracking, scoreboard detec
 
 ---
 
-## 🖥️ Application Preview
+## Application Preview
 
 ### GOALlens Dashboard
 
@@ -20,7 +20,7 @@ The system combines **YOLO object detection, football tracking, scoreboard detec
 
 ---
 
-## 🎬 Highlight Generation Demo
+## Highlight Generation Demo
 
 GOALlens automatically detects football events and generates highlight clips from the input match video.
 
@@ -30,7 +30,7 @@ The generated highlight pipeline combines ball-based event detection with scoreb
 
 ---
 
-## 📌 Problem Statement
+## Problem Statement
 
 Football matches can last more than 90 minutes and contain a large amount of gameplay that may not be relevant to viewers looking for important moments.
 
@@ -40,7 +40,7 @@ GOALlens aims to automatically analyze football match videos and generate highli
 
 ---
 
-## 🎯 Objectives
+## Objectives
 
 The main objectives of GOALlens are:
 
@@ -58,7 +58,7 @@ The main objectives of GOALlens are:
 
 ---
 
-## 🏗️ Project Architecture
+## Project Architecture
 
 The overall GOALlens system consists of a React frontend, FastAPI backend, computer vision pipelines, event detection modules, and automated highlight generation.
 
@@ -105,7 +105,7 @@ flowchart TD
 
 ---
 
-## 🗂️ Dataset
+## Dataset
 
 ### 1. SoccerNet Dataset
 
@@ -166,7 +166,7 @@ Users can provide their own football match video as input when running the appli
 
 ---
 
-## 🧠 Methodology
+## Methodology
 
 The GOALlens pipeline consists of several stages.
 
@@ -259,7 +259,7 @@ The final merged clips are concatenated to generate the AI-generated highlight v
 
 ---
 
-## 🛠️ Technologies and Libraries
+## Technologies and Libraries
 
 ### Backend
 
@@ -298,7 +298,7 @@ The final merged clips are concatenated to generate the AI-generated highlight v
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 GOALLENS-AI/
@@ -353,7 +353,7 @@ GOALLENS-AI/
 
 ---
 
-## ⚙️ Installation
+## Installation
 
 ### Prerequisites
 
@@ -442,7 +442,7 @@ Open the URL in a browser to access the GOALlens application.
 
 ---
 
-## 🤖 Model Files
+## Model Files
 
 Two trained YOLO models are included in the repository.
 
@@ -464,7 +464,7 @@ If future model files exceed GitHub's file-size limitations, they should be host
 
 ---
 
-## 📊 Results & Performance
+## Results & Performance
 
 GOALlens successfully demonstrates an end-to-end football highlight generation pipeline.
 
@@ -511,12 +511,12 @@ The ball tracking pipeline combines YOLO detections, interpolation, and Kalman f
 
 The system combines multiple event sources to generate football highlights:
 
-* ⚽ Scoreboard-based goal detection
-* 🟢 Ball-based highlight detection
-* 🎯 Event confidence scoring
-* ⏱️ Temporal highlight windows
-* 🔗 Overlapping-window merging
-* 🎬 Automated FFmpeg video generation
+* Scoreboard-based goal detection
+* Ball-based highlight detection
+* Event confidence scoring
+* Temporal highlight windows
+* Overlapping-window merging
+* Automated FFmpeg video generation
 
 For detected goals, the system generates a highlight window covering approximately **30 seconds before and 30 seconds after the detected event**.
 
@@ -525,7 +525,7 @@ Goal Event
     │
     ├── -30 seconds
     │
-    ├── ⚽ Goal
+    ├── Goal Event
     │
     └── +30 seconds
              │
@@ -537,7 +537,7 @@ When multiple highlight events overlap, the corresponding temporal windows are m
 
 ---
 
-## 🎥 Sample Outputs
+## Sample Outputs
 
 Sample input videos and generated highlight videos can be provided separately because football videos and generated clips can be large.
 
@@ -561,7 +561,7 @@ Large media files should be hosted externally rather than committed directly to 
 
 ---
 
-## 📌 Important Notes
+## Important Notes
 
 The following directories are excluded from Git using `.gitignore`:
 
@@ -576,7 +576,7 @@ The project source code, trained YOLO models, documentation images, and demonstr
 
 ---
 
-## 🔬 Project Highlights
+## Project Highlights
 
 GOALlens integrates multiple computer vision techniques into a single football video analysis system:
 
@@ -595,7 +595,7 @@ GOALlens integrates multiple computer vision techniques into a single football v
 * React-based visualization interface
 * FastAPI-based backend processing
 
-## 📄 License
+## License
 
 This project is licensed under the **MIT License**.
 
