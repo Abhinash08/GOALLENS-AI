@@ -1,8 +1,8 @@
-# ⚽ GOALLENS-AI
+# ⚽ GOALlens
 
 ## AI-Based Football Highlight Detection and Generation
 
-GOALLENS-AI is an AI-powered computer vision system that automatically analyzes football match videos, detects important events, and generates a concise highlight video.
+**GOALlens** is an AI-powered computer vision system that automatically analyzes football match videos, detects important events, and generates a concise highlight video.
 
 The system combines **YOLO object detection, football tracking, scoreboard detection, OCR, temporal event analysis, and automated video processing** to identify important moments such as goals and ball-related events.
 
@@ -10,21 +10,21 @@ The system combines **YOLO object detection, football tracking, scoreboard detec
 
 ## 🖥️ Application Preview
 
-### GOALLENS-AI Dashboard
+### GOALlens Dashboard
 
-![GOALLENS-AI Dashboard](docs/images/goallens-dashboard.png)
+![GOALlens Dashboard](docs/images/goallens-dashboard.png)
 
-### Highlight Generation Interface
+### Video Upload & Highlight Generation Interface
 
-![GOALLENS-AI Highlight Generation](docs/images/goallens-dashboard2.png)
+![GOALlens Highlight Generation](docs/images/goallens-dashboard2.png)
 
 ---
 
 ## 🎬 Highlight Generation Demo
 
-GOALLENS-AI automatically detects football events and generates highlight clips from the input match video.
+GOALlens automatically detects football events and generates highlight clips from the input match video.
 
-![GOALLENS-AI Highlight Demo](docs/images/goallens-highlight-demo.gif)
+![GOALlens Highlight Demo](docs/images/goallens-highlight-demo.gif)
 
 The generated highlight pipeline combines ball-based event detection with scoreboard-based goal detection and merges overlapping highlight intervals into a final video.
 
@@ -36,13 +36,13 @@ Football matches can last more than 90 minutes and contain a large amount of gam
 
 Manually reviewing an entire match to identify goals and other important events is time-consuming.
 
-GOALLENS-AI aims to automatically analyze football match videos and generate highlight videos containing important moments without requiring the user to manually search through the entire match.
+GOALlens aims to automatically analyze football match videos and generate highlight videos containing important moments without requiring the user to manually search through the entire match.
 
 ---
 
 ## 🎯 Objectives
 
-The main objectives of GOALLENS-AI are:
+The main objectives of GOALlens are:
 
 * Detect the football in match videos.
 * Track the football across consecutive frames.
@@ -60,7 +60,7 @@ The main objectives of GOALLENS-AI are:
 
 ## 🏗️ Project Architecture
 
-The overall GOALLENS-AI system consists of a React frontend, FastAPI backend, computer vision pipelines, event detection modules, and automated highlight generation.
+The overall GOALlens system consists of a React frontend, FastAPI backend, computer vision pipelines, event detection modules, and automated highlight generation.
 
 ```mermaid
 flowchart TD
@@ -156,7 +156,7 @@ backend/models/scoreboard/best.pt
 
 ### 4. Match Videos
 
-Football match videos were used for testing and demonstrating the complete GOALLENS-AI highlight-generation pipeline.
+Football match videos were used for testing and demonstrating the complete GOALlens highlight-generation pipeline.
 
 Due to the large size of football video files, the original match videos and generated highlight videos are **not included directly in this repository**.
 
@@ -168,7 +168,7 @@ Users can provide their own football match video as input when running the appli
 
 ## 🧠 Methodology
 
-The GOALLENS-AI pipeline consists of several stages.
+The GOALlens pipeline consists of several stages.
 
 ```text
 Football Match Video
@@ -438,7 +438,7 @@ Vite will provide a local development URL, normally:
 http://localhost:5173
 ```
 
-Open the URL in a browser to access the GOALLENS-AI application.
+Open the URL in a browser to access the GOALlens application.
 
 ---
 
@@ -466,7 +466,7 @@ If future model files exceed GitHub's file-size limitations, they should be host
 
 ## 📊 Results & Performance
 
-GOALLENS-AI successfully demonstrates an end-to-end football highlight generation pipeline.
+GOALlens successfully demonstrates an end-to-end football highlight generation pipeline.
 
 The system is capable of:
 
@@ -578,7 +578,7 @@ The project source code, trained YOLO models, documentation images, and demonstr
 
 ## 🔬 Project Highlights
 
-GOALLENS-AI integrates multiple computer vision techniques into a single football video analysis system:
+GOALlens integrates multiple computer vision techniques into a single football video analysis system:
 
 * YOLO-based object detection
 * Football tracking
