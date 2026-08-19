@@ -1,7 +1,14 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFutbol,
+  faBullseye,
+  faWandMagicSparkles,
+} from "@fortawesome/free-solid-svg-icons";
 import "./App.css";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
 
 function App() {
   const [file, setFile] = useState(null);
@@ -76,7 +83,7 @@ function App() {
       const data = await response.json();
 
       console.log("====================================");
-      console.log("GOALLENS BACKEND RESPONSE");
+      console.log("GOALlens BACKEND RESPONSE");
       console.log("====================================");
       console.log(data);
 
@@ -107,7 +114,7 @@ function App() {
 
       setError(
         err.message ||
-          "Could not connect to the GOALLENS AI backend."
+          "Could not connect to the GOALlens backend."
       );
     } finally {
       setProcessing(false);
@@ -169,12 +176,13 @@ function App() {
         <div className="brand">
 
           <div className="brand-mark">
-            <span>⚽</span>
+            <FontAwesomeIcon icon={faFutbol} />
           </div>
 
           <div className="brand-text">
-            <h1>GOALLENS</h1>
-            <span>AI</span>
+            <h1>
+              GOAL<span className="brand-lens">lens</span>
+            </h1>
           </div>
 
         </div>
@@ -245,7 +253,7 @@ function App() {
 
 
               <p>
-                GOALLENS AI transforms full football
+                GOAL<span className="brand-lens-inline">lens</span> transforms full football
                 matches into intelligent highlights using
                 scoreboard OCR, ball detection, tracking
                 and event analysis.
@@ -255,18 +263,18 @@ function App() {
               <div className="hero-features">
 
                 <div className="hero-feature">
-                  <span>⚽</span>
-                  Goal Detection
+                  <FontAwesomeIcon icon={faFutbol} className="feature-icon" />
+                  <span>Goal Detection</span>
                 </div>
 
                 <div className="hero-feature">
-                  <span>🎯</span>
-                  Ball Tracking
+                  <FontAwesomeIcon icon={faBullseye} className="feature-icon" />
+                  <span>Ball Tracking</span>
                 </div>
 
                 <div className="hero-feature">
-                  <span>✨</span>
-                  AI Highlights
+                  <FontAwesomeIcon icon={faWandMagicSparkles} className="feature-icon" />
+                  <span>AI Highlights</span>
                 </div>
 
               </div>
@@ -525,7 +533,7 @@ function App() {
 
 
                     <h3>
-                      GOALLENS is analyzing the game
+                      GOALlens is analyzing the game
                     </h3>
 
 
@@ -611,9 +619,9 @@ function App() {
 
         <div className="footer-brand">
 
-          <span>⚽</span>
+          <FontAwesomeIcon icon={faFutbol} className="footer-fa-icon" />
 
-          GOALLENS AI
+          <span>GOAL<span className="brand-lens">lens</span></span>
 
         </div>
 
@@ -771,9 +779,9 @@ function Results({
    * see exactly what the backend returned.
    */
 
-  console.log("GOALLENS RESULT DATA:", result);
+  console.log("GOALlens RESULT DATA:", result);
 
-  console.log("GOALLENS GOAL COUNT:", goalCount);
+  console.log("GOALlens GOAL COUNT:", goalCount);
 
 
   /* ==========================================================
@@ -872,7 +880,7 @@ function Results({
 
 
               <strong>
-                GOALLENS Generated Highlight Reel
+                GOALlens Generated Highlight Reel
               </strong>
 
             </div>
